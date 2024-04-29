@@ -1,9 +1,9 @@
 #pragma once
 
-#include <list>
-
-#include "Point.h" //the library we need to implement the snake
+#include "Point.h"
 #include "Snack.h"
+
+#include <list>
 
 #define BODY 'o'
 class Snake{

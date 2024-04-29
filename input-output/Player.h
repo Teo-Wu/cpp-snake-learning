@@ -1,14 +1,16 @@
 #pragma once
 
+#include "../game/Controller.h"
+
 #include <iostream>
 #include <string>
-#include "Controller.h"
 
 class Player{
 private:
     std::string name;
     unsigned int points;
     unsigned int timesPlayed;
+    
 public:
     Player();
     Player(std::string _name);

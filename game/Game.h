@@ -1,10 +1,11 @@
 #pragma once
 
-//This class will be the abstract Game Interface
-#include <string>
 #include "Controller.h"
-#include "Snake.h"
-#include "Player.h"
+#include "../components/Snake.h"
+#include "../input-output/Player.h"
+
+#include <string>
+
 class SnakeGame{
 private:
     std::string gameName;

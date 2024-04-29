@@ -1,13 +1,13 @@
 #pragma once
 
-#include <curses.h> //include library for terminal graphics
+#include <curses.h>
 
 #define UP KEY_UP
 #define DOWN KEY_DOWN
 #define LEFT KEY_LEFT
 #define RIGHT KEY_RIGHT
 #define EXIT_GAME 'q'
-typedef int graphics_input; //the type of the graphics input
+typedef int graphics_input;
 
 
 #define GAME_TOP_WALL_Y 1

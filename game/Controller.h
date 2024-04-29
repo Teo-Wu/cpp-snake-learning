@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Graphics.h"
-#include "Snake.h"
+#include "../input-output/Graphics.h"
+#include "../components/Snake.h"
+#include "../components/Point.h"
 
 #define DEFEAT -1
 
