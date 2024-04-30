@@ -1,58 +1,50 @@
-#include <iostream>
-#include <string>
 #include "Point.h"
 
-/*snake will be an array of points*/
+Point::Point(uint32_t y, uint32_t x, int img)
+    : x_ {x}, y_ {y}, img_ {img}
+{ }
 
-using namespace std;
-Point::Point(int y, int x, graphics_input img)
-: x {x}, y{y}, img{img}
-{}
-//delegating the previous constructor
-Point::Point()
-:Point(10, 10, '*')
-{}
-
-Point::~Point(){/*No need to do something */}
-
-void Point::setPoint(int y, int x){
-    this->x = x;
-    this->y = y;
+void Point::setPoint(uint32_t y, uint32_t x) {
+    x_ = x;
+    y_ = y;
 }
 
-int Point::getX(void){
-    return this->x;
+uint32_t Point::getX() const {
+    return x_;
 }
 
-int Point::getY(void){
-    return this->y;
+uint32_t Point::getY() const {
+    return y_;
 }
 
-void Point::moveUp(void){
-    y--;
+void Point::moveUp() {
+    y_--;
 }
 
-void Point::moveDown(void){
-    y++;
+void Point::moveDown() {
+    y_++;
 }
 
-void Point::moveLeft(void){
-    x--;
+void Point::moveLeft() {
+    x_--;
 }
 
-void Point::moveRight(void){
-    x++;
+void Point::moveRight() {
+    x_++;
 }
 
-graphics_input Point::getImg(){
-    return this->img;
+int Point::getImg() const {
+    return img_;
 }
-void Point::setImg(graphics_input image){
-    this->img = image;
+
+void Point::setImg(int image){
+    img_ = image;
 }
-void Point::printImg(){
-    printChar(this->y, this->x, this->img);
+
+void Point::print() const {
+    Graphics::get().printChar(y_, x_, img_);
 }
-void Point::erase(void){
-    this->img = ' ';
+
+void Point::clear(){
+    img_ = ' ';
 }

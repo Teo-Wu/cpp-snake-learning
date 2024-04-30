@@ -1,86 +1,69 @@
 #include "Controller.h"
-#include <assert.h>
+
 #include <string>
 
-using namespace std;
-
 Controller::Controller()
-: snack{SNACK} ,inpt{0}, currentScore{0}
+    : input_{0}, score_{0}, snack_{Point(0,0,0)}
 {
-    snake = new Snake();
-    generateSnack(snack);
+    generateSnack(&snack_);
 }
 
-Controller::Controller(Snake *_snake)
-: snake{_snake}, snack{SNACK}, inpt{0}, currentScore{0}
-{
-
-    assert(this->snake != NULL);
+uint32_t Controller::getCurrScore() const {
+    return score_;
 }
 
-unsigned int Controller::getCurrScore(void){
-    return this->currentScore;
+void Controller::resetScore() {
+    score_ = 0;
 }
 
-void Controller::resetScore(void){
-    this->currentScore = 0;
+void Controller::printScore(uint32_t score) const {
+    const std::string str = "Score: " + std::to_string(score); 
+    // locate message at (-1,-1) because otherwise it'll be printed inside the game box
+    Graphics::get().printMsg(-1, -1, str);
 }
 
-Controller::~Controller(){delete snake;}
-
-static void printScore(unsigned int _score){
-    string str = "Score: " + to_string(_score); 
-    printMsg(-1, -1, (char*)str.c_str()); //-1, -1 because otherwise it'll be printed inside the game box
-}
-
-int Controller::act(void){
-
-    if (snake->hasBitSnack(this->snack.getY(), this->snack.getX()) == true)
-    {
-        this->currentScore += 10;
+int Controller::act() {
+    if (snake_.hasBitSnack(snack_.getY(), snack_.getX())) {
+        score_ += 10;
+        snake_.incSize();
         
-        advanceDifficulty();
-        generateSnack(this->snack);
+        generateSnack(&snack_);
+        Graphics::get().advanceDifficulty();
         
-        this->snake->incSize();
-
-        printScore(currentScore);
+        printScore(score_);
     }
 
-    switch (this->inpt)
-    {
+    switch (input_) {
     case UP:
-            snake->moveUp();
+        snake_.moveUp();
         break;
     case DOWN:
-            snake->moveDown();
+        snake_.moveDown();
         break;
     case LEFT:
-            snake->moveLeft();
+        snake_.moveLeft();
         break;
     case RIGHT:
-            snake->moveRight();
+        snake_.moveRight();
         break;
     default:
-        snake->move();
-    break;
+        snake_.move();
     }
 
-    refreshScreen();
+    Graphics::get().refreshScreen();
 
-    if(snake->isBitten()) 
+    if (snake_.isBitten() || snake_.hasCrashedWall()) {
         return DEFEAT;
-    if (snake->hasCrashedWall())
-        return DEFEAT;
+    }
+
     return 0;
 }
 
-graphics_input Controller::readInput(void){
-    this->inpt = readInpt();
-    refreshScreen();
-    return inpt;
+int Controller::readInput() {
+    input_ = Graphics::get().readInpt();
+    return input_;
 }
 
-bool Controller::wantsToQuit(void){
-    return this->inpt == EXIT_GAME;
+bool Controller::wantsToQuit() const {
+    return input_ == EXIT_GAME;
 }

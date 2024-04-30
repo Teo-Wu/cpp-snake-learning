@@ -1,43 +1,32 @@
 #include "Player.h"
 
-using namespace std;
-
-Player::Player()
-: name{"Unknown"}, points{0}, timesPlayed{0}
+Player::Player(std::string name)
+    : name_{name}
 {}
 
-Player::Player(string _name)
-: name{_name}, points{0}, timesPlayed{0}
-{}
-
-Player::~Player()
-{/* No need to do something */}
-
-string Player::getName(void){
-    return this->name;
+const std::string& Player::getName() const {
+    return name_;
 }
 
-void Player::addPoints(unsigned int _points){
-    points += _points;
+uint32_t Player::getHighScore() const {
+    return high_score_;
 }
 
-unsigned int Player::getPoints(void){
-    return this->points;
-}
-
-std::pair<std::string, unsigned int>  Player::play(void){
-    //here we will implement the basic loop of the game since each player has its remote controller
-    //and can play the game
+void Player::play(){
     Controller controller;
-    while (controller.wantsToQuit() == false)
-    {
+
+    while (controller.wantsToQuit() == false) {
         controller.readInput();
-        if (controller.act() == DEFEAT)
+
+        if (controller.act() == DEFEAT) {
             break;
+        }
     }
 
-    points = controller.getCurrScore();
+    const uint32_t score = controller.getCurrScore();
     controller.resetScore();
 
-    return {this->name, points};
+    if (score > high_score_) {
+        high_score_ = score;
+    }
 }

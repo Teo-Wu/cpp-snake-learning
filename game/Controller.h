@@ -1,27 +1,31 @@
 #pragma once
 
+#include <memory>
+
 #include "../input-output/Graphics.h"
 #include "../components/Snake.h"
 #include "../components/Point.h"
 
-#define DEFEAT -1
+static constexpr int DEFEAT = -1;
 
-class Controller{
+class Controller {
 private:
-    Snake *snake; //the figure the controler controls
-    Point snack;
-    graphics_input inpt;
-    unsigned int currentScore;
+    Snake snake_;
+    Point snack_;
+
+    int input_;
+    uint32_t score_;
+
+    void printScore(uint32_t score) const;
+
 public:
-    Controller(Snake* _snake);
     Controller();
-    ~Controller(); //default destructor
 
-    unsigned int getCurrScore(void);
-    void resetScore(void);
-    graphics_input readInput(void);   //basic input methods: sets inpt to what it read if i tread something
+    uint32_t getCurrScore() const;
 
-    int act(void);                   //basic act method: acts like a joystick
+    void resetScore();
+    int readInput();
+    int act();
 
-    bool wantsToQuit(void);           //returns true of the user wants to quit
+    bool wantsToQuit() const;
 };

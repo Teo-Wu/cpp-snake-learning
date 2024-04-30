@@ -1,77 +1,64 @@
 #include "Game.h"
+
 #include <algorithm>
 #include <limits.h>
-using namespace std;
 
-SnakeGame::SnakeGame()
-:gameName{"~Snake Game by VissaM~"},highScore{0}, bestPlayer{"None"}
-{}
-
-SnakeGame::~SnakeGame(){}
-
-void SnakeGame::addPlayer(string playerName){
-    players.emplace_back( Player{playerName} );
+void SnakeGame::addPlayer(const std::string& name){
+    players_.emplace_back(Player{name});
 }
 
-unsigned int SnakeGame::getHighScore(void){
-    return highScore;
+uint32_t SnakeGame::getHighScore() const {
+    return high_score_;
 }
 
-string SnakeGame::getBestPlayer(void){
-    return bestPlayer;
+const std::string& SnakeGame::getBestPlayer() const {
+    return best_player_;
 }
 
-void SnakeGame::play(string playerName){
-    pair<string, unsigned int> curBest{playerName, 0};
-    for(auto player : players){
-        if(player.getName() == playerName){
-            initializeGraphics((char *)gameName.c_str());
-            curBest = player.play();
-            endGraphics();
-            break;
-        }
+void SnakeGame::play(const std::string& name){
+    auto find = std::find(players_.begin(), players_.end(), [&name](const Player& p){ return p.getName() == name; });
+
+    if (find == players_.end()) {
+        players_.emplace_back(Player(name));
+        find = std::prev(players_.end());
     }
 
-    if(curBest.second > highScore){
-        highScore = curBest.second;
-        bestPlayer = curBest.first;
+    Graphics::get().init(game_name_);
+
+    find->play();
+
+    Graphics::get().finalize();
+
+
+    if (find->getHighScore() > high_score_){
+        high_score_ = find->getHighScore();
+        best_player_ = find->getName();
     }
 
-    cout << "Highscore: " << highScore << " by " << bestPlayer << "\n" <<endl;
+    std::cout << "Highscore: " << high_score_ << " by " << best_player_ << std::endl;
 }
 
-void SnakeGame::play(void){
-    while(1){
-        string playerName;
-        cout << "Who's playing: ";
-        cin >> playerName;
-        cout << endl;
+void SnakeGame::play(){
+    while(1) {
+        std::string name;
+        std::cout << "Who's playing: ";
+        std::cin >> name;
+        std::cout << std::endl;
 
-        list<Player>::iterator p;
-        for(p=players.begin(); p!=players.end(); p++){
-            if(p->getName() == playerName)
-                break;  
-        }
 
-        if(p == players.end()){
-            //if the player isn't in the list, add him/her
-            addPlayer(playerName);
-        }
-
+        play(name);
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Do you or someone else want to play again? (yes or no): ";
+        std::string ans;
         
-        play(playerName); //get the player to play the game
-
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Do you want to play again? (yes or no): ";
-        string ans;
+        std::cin >> ans;
         
-        cin >> ans;
-        
-        if(ans != "yes"){
-            cout << "Exiting ..." << endl;
+        if (ans != "yes") {
+            std::cout << "Exiting ..." << std::endl;
             break;
         }
-        cout << "Perfect...\n" << endl;
+
+        std::cout << "Perfect..." << std::endl;
     }
 }

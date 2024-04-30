@@ -4,23 +4,25 @@
 
 class Point{
 private:
-    int x;
-    int y;
-    graphics_input img;
+    uint32_t x_;
+    uint32_t y_;
+    int img_;
+
 public:
-    Point();
-    Point(int y = 10, int x = 10, graphics_input img = '*');
-    ~Point();
-    void setPoint(int y, int x);
-    int getX();
-    int getY();
+    Point(uint32_t y, uint32_t x, int img = '*');
+
+    void setPoint(uint32_t y, uint32_t x);
+    uint32_t getX() const;
+    uint32_t getY() const;
+
     void moveUp();
     void moveDown();
     void moveLeft();
     void moveRight();
-    graphics_input getImg();
-    void setImg(graphics_input image);
-    void printImg();
-    void erase();
-    void randomize();
+
+    int getImg() const;
+    void setImg(int image);
+
+    void print() const;
+    void clear();
 };

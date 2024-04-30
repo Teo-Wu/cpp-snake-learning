@@ -4,86 +4,89 @@
 #include <time.h>
 #include <cstdlib>
 
-///Utillities for the graphics
-unsigned int sleepTime = 40000000;
-static WINDOW *_box = NULL;
+void Graphics::createBox() {
+    box_ = newwin(LINES-2, COLS, 2, 0);
+    box(box_, 0, 0);
+    wrefresh(box_);
+}
 
-static void createBox(void){
-    _box = newwin(LINES-2, COLS, 2, 0);
-    box(_box, 0, 0);
-    wrefresh(_box);
+void Graphics::destroyBox() {
+    wborder(box_, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
+    wrefresh(box_);
+    delwin(box_);
 }
-static void destroyBox(void){
-    wborder(_box, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
-    wrefresh(_box);
-    delwin(_box);
-}
-//Initialization function
-void initializeGraphics(char* gameName){
+
+void Graphics::init(const std::string& gameName) {
     srand((unsigned int) time(NULL));
 
-    initscr(); //initialize curses
-    cbreak(); //set line buffering to false
-    noecho(); //set input echo to false
-    keypad(stdscr, TRUE); //this step enables the use of arrow keys and other function keys
+    initscr();
+    cbreak();
+    noecho();
+    keypad(stdscr, TRUE);
     nodelay(stdscr, true);
-    curs_set(0); //to hide the cursor
-    //We must clear the screen from unecessary garbage
+    curs_set(0);
+
     clear();
-    //Print the title
-    mvprintw(0, (COLS/2) - 12, gameName);
+
+    mvprintw(0, (COLS/2) - 12, gameName.c_str());
     refresh();
     
-    //create the game box
     createBox();
 }
 
-//Exit function
-void endGraphics(void){
+void Graphics::finalize() {
     curs_set(1);
     destroyBox();
     endwin();
 }
 
-//Typical refresh function (ease the eye with a custom function instead of the actual one)
-void refreshScreen(void){
-    using namespace std::this_thread; // sleep_for, sleep_until
-    using namespace std::chrono;      // nanoseconds, system_clock, seconds
-    sleep_for(nanoseconds(sleepTime));
+void Graphics::refreshScreen() {
+    using namespace std::this_thread;
+    using namespace std::chrono;
     
-    refresh(); // just use the curses version ;p
-    wrefresh(_box);
-}
-
-void printChar(int y, int x, graphics_input img){
-    mvwaddch(_box, y, x, img);
+    sleep_for(nanoseconds(sleep_time_));
+    
     refresh();
-    wrefresh(_box);
+    wrefresh(box_);
 }
 
-void printMsg(int y, int x, char* str){
-    if(y>0 && x>0)
-        mvwaddstr(_box, y, x, str);
-    else{
-        if(y < 0) y = 2 + y;
-        if(x < 0) x = 0;
-        mvaddstr(y, x, str);
+void Graphics::printChar(int y, int x, int img) {
+    mvwaddch(box_, y, x, img);
+    refresh();
+    wrefresh(box_);
+}
+
+void Graphics::printMsg(int y, int x, const std::string& str) {
+    if(y > 0 && x > 0) {
+        mvwaddstr(box_, y, x, str.c_str());
     }
+    else {
+        if(y < 0) y += 2;
+        if(x < 0) x = 0;
+        mvaddstr(y, x, str.c_str());
+    }
+
     refresh();
-    wrefresh(_box);
+    wrefresh(box_);
 }
 
-char readChar(int y, int x){
+char Graphics::readChar(int y, int x) {
     refresh();
-    wrefresh(_box);
-    return mvwgetch(_box, y, x);
+    wrefresh(box_);
+    return mvwgetch(box_, y, x);
 }
 
-int readInpt(){
+int Graphics::readInpt() {
     return getch();
 }
 
-void advanceDifficulty(void){
-    if(sleepTime > 28000000) // we set 28000000 as teh min sleep time
-        sleepTime -= 1000000;
+void Graphics::advanceDifficulty() {
+    if(sleep_time_ > 28000000) {
+        sleep_time_ -= 1000000;
+    }
+}
+
+Graphics& Graphics::get() {
+    static Graphics graphics;
+    return graphics;
 }

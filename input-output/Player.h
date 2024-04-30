@@ -7,20 +7,15 @@
 
 class Player{
 private:
-    std::string name;
-    unsigned int points;
-    unsigned int timesPlayed;
-    
+    std::string name_;
+    uint32_t high_score_ = 0;
+    uint32_t timesPlayed_ = 0;
+
 public:
-    Player();
-    Player(std::string _name);
-    ~Player();
+    Player(std::string name);
 
-    std::pair<std::string, unsigned int> play(void);
+    void play();
 
-    //Point managment methods
-    unsigned int getPoints(void);
-    void addPoints(unsigned int _points);
-
-    std::string getName(void);
+    uint32_t getHighScore() const;
+    const std::string& getName() const;
 };

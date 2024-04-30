@@ -2,8 +2,6 @@
 
 #include "Point.h"
 
-#define SNACK '*'
+static constexpr int SNACK_CHAR = '*';
 
-//snack methods
-void generateSnack(Point &snack);
-unsigned int getSnackScore(void);
+void generateSnack(Point* snack);

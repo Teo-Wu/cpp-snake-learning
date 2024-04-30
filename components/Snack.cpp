@@ -1,22 +1,17 @@
 #include "Snack.h"
-#include <cstdlib>
 
-using namespace std;
+#include <random>
 
+void generateSnack(Point* snack){
+    std::random_device dev;
+    static std::mt19937 prng(dev());
+    static std::uniform_int_distribution<std::mt19937::result_type> distX(0, GAME_RIGHT_WALL_X);
+    static std::uniform_int_distribution<std::mt19937::result_type> distY(0, GAME_BOTTOM_WALL_Y);
 
-const unsigned int snackScore = 10;
-
-void generateSnack(Point &snack){
-
-    int x, y;
+    const uint32_t x = distX(prng);
+    const uint32_t y = distY(prng);
     
-    x = rand() % GAME_RIGHT_WALL_X + 1;
-    y = rand() % GAME_BOTTOM_WALL_Y + 1;
-    
-    snack.setPoint(y, x);
-
-    printChar(y, x, snack.getImg());
-}
-unsigned int getSnackScore(void){
-    return snackScore;
+    snack->setImg(SNACK_CHAR);
+    snack->setPoint(y, x);
+    snack->print();
 }

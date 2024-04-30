@@ -1,34 +1,34 @@
 #pragma once
 
+#include <vector>
+
 #include "Point.h"
 #include "Snack.h"
 
-#include <list>
+static constexpr int SNAKE_BODY_CHAR = 'o';
+static constexpr uint32_t SNAKE_DEFAULT_SIZE = 4;
 
-#define BODY 'o'
 class Snake{
 private:
-    std::list<Point> snake; //the snake will be implemented as a list of points where the first element is the head
-    graphics_input direction;
-    void updateHead(void);
-    void printSnake(void);
+    std::vector<Point> snake_;
+    int direction_;
+
+    void updateHead();
+    void printSnake() const;
+
 public:
-    Snake(int headY = LINES/2, int headX = COLS/2); //default constructor
-    ~Snake(); //destructor
+    Snake(uint32_t headY = LINES/2, uint32_t headX = COLS/2);
 
-    //basic move functions
-    void moveUp(void);
-    void moveDown(void);
-    void moveLeft(void);
-    void moveRight(void);
+    void moveUp();
+    void moveDown();
+    void moveLeft();
+    void moveRight();
+    void move();
 
-    bool isBitten(void);                     //function to check if the snake bit its self
-    bool hasBitSnack(int snackY, int snackX);//checks if the snake has bitten a snack
+    bool isBitten() const;
+    bool hasBitSnack(uint32_t snackY, uint32_t snackX) const;
+    bool hasCrashedWall() const;
 
-    bool hasCrashedWall(void);               // method to check if the snake crashed the walls
-
-    int getSize(void);                       //get the current length
-    void incSize(void);                      //function to increase the length
-
-    void move(void);                         //function to refresh the image of the snake
+    uint32_t getSize() const;
+    void incSize();
 };

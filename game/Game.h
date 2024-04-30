@@ -1,31 +1,27 @@
 #pragma once
 
+#include <string>
+#include <vector>
+
 #include "Controller.h"
 #include "../components/Snake.h"
 #include "../input-output/Player.h"
 
-#include <string>
-
 class SnakeGame{
 private:
-    std::string gameName;
-    std::list<Player> players;
-    unsigned int highScore;
-    std::string bestPlayer;
+    const std::string game_name_ = "Snake Game for C++ Course";
+    std::vector<Player> players_;
+
+    uint32_t high_score_ = 0;
+    std::string best_player_ = "None";
     
-    void play(std::string playerName);
-    void addPlayer(std::string playerName);
+    void play(const std::string& name);
+    void addPlayer(const std::string& name);
 
 public:
-    SnakeGame(); //intialize graphics and set the game screen
-    ~SnakeGame();
+    uint32_t getHighScore() const;
+    const std::string& getBestPlayer() const;
+    void printGameStatistics() const;
 
-    
-    unsigned int getHighScore(void);
-    std::string getBestPlayer(void);
-
-    //print the statistics (highest score & games played) of each player
-    //void printGameStatistics(void);
-
-    void play(void);
+    void play();
 };
