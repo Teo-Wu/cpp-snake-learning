@@ -9,17 +9,22 @@ static constexpr int LEFT = KEY_LEFT;
 static constexpr int RIGHT = KEY_RIGHT;
 static constexpr int EXIT_GAME = 'q';
 
-static constexpr int GAME_TOP_WALL_Y = 1;
-const int GAME_BOTTOM_WALL_Y = LINES - 4;
-static constexpr int GAME_LEFT_WALL_X = 1;
-const int GAME_RIGHT_WALL_X = COLS - 2;
+static constexpr uint32_t GAME_TOP_WALL_Y = 1;
+static constexpr uint32_t GAME_LEFT_WALL_X = 1;
+#define GAME_BOTTOM_WALL_Y (LINES - 4)
+#define GAME_RIGHT_WALL_X (COLS - 2)
+
+static constexpr uint32_t DIFFICULTY_BEGIN = 40000;
+static constexpr uint32_t DIFFICULTY_CAP = 28000;
+static constexpr uint32_t DIFFICULTY_CHANGE = 1000;
 
 class Graphics {
 private:
-    unsigned int sleep_time_ = 40000000;
-    WINDOW* box_ = NULL;
+    bool vertical_ = false;
+    uint32_t sleep_time_ = DIFFICULTY_BEGIN;
+    WINDOW* box_ = nullptr;
 
-    Graphics();
+    Graphics() = default;
     void createBox();
     void destroyBox();
 
@@ -35,5 +40,6 @@ public:
     int readInpt();
 
     void advanceDifficulty();
+    void setVertical(bool value);
 };
 

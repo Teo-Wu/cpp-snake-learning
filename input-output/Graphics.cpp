@@ -41,10 +41,10 @@ void Graphics::finalize() {
 }
 
 void Graphics::refreshScreen() {
-    using namespace std::this_thread;
-    using namespace std::chrono;
-    
-    sleep_for(nanoseconds(sleep_time_));
+    const float window_factor = (static_cast<float>(LINES) * 5.25f) / static_cast<float>(COLS);
+    const uint32_t vertical_sleep_time = window_factor * sleep_time_;
+
+    std::this_thread::sleep_for(std::chrono::microseconds(vertical_ ? vertical_sleep_time : sleep_time_));
     
     refresh();
     wrefresh(box_);
@@ -81,12 +81,16 @@ int Graphics::readInpt() {
 }
 
 void Graphics::advanceDifficulty() {
-    if(sleep_time_ > 28000000) {
-        sleep_time_ -= 1000000;
+    if (sleep_time_ > DIFFICULTY_CAP) {
+        sleep_time_ -= DIFFICULTY_CHANGE;
     }
 }
 
 Graphics& Graphics::get() {
     static Graphics graphics;
     return graphics;
+}
+
+void Graphics::setVertical(bool value) {
+    vertical_ = value;
 }

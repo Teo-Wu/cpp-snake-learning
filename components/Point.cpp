@@ -45,6 +45,7 @@ void Point::print() const {
     Graphics::get().printChar(y_, x_, img_);
 }
 
-void Point::clear(){
+void Point::clear() {
     img_ = ' ';
+    print();
 }

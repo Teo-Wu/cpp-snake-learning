@@ -1,6 +1,7 @@
 #include "Controller.h"
 
 #include <string>
+#include <iostream>
 
 Controller::Controller()
     : input_{0}, score_{0}, snack_{Point(0,0,0)}
@@ -26,7 +27,7 @@ int Controller::act() {
     if (snake_.hasBitSnack(snack_.getY(), snack_.getX())) {
         score_ += 10;
         snake_.incSize();
-        
+
         generateSnack(&snack_);
         Graphics::get().advanceDifficulty();
         
@@ -36,15 +37,19 @@ int Controller::act() {
     switch (input_) {
     case UP:
         snake_.moveUp();
+        Graphics::get().setVertical(true);
         break;
     case DOWN:
         snake_.moveDown();
+        Graphics::get().setVertical(true);
         break;
     case LEFT:
         snake_.moveLeft();
+        Graphics::get().setVertical(false);
         break;
     case RIGHT:
         snake_.moveRight();
+        Graphics::get().setVertical(false);
         break;
     default:
         snake_.move();

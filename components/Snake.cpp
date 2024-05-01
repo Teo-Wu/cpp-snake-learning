@@ -1,13 +1,11 @@
 #include "Snake.h"
 
-#include <iostream>
-
 Snake::Snake(uint32_t headY, uint32_t headX)
     :direction_{LEFT}
 {
     snake_.push_back(Point{headY, headX, '>'});
 
-    for (uint32_t i = 1; i <= SNAKE_DEFAULT_SIZE - 1; i++) {
+    for (uint32_t i = 1; i <= SNAKE_DEFAULT_SIZE; i++) {
         snake_.push_back(Point{headY, headX + i, SNAKE_BODY_CHAR});
     }
 }
@@ -15,8 +13,11 @@ Snake::Snake(uint32_t headY, uint32_t headX)
 bool Snake::isBitten() const {
     const Point& head = snake_.front();
 
-    for (const Point& part : snake_) {
-        if (part.getX() == head.getX() && part.getY() == head.getY()) {
+    // use manual iterator loop instead of
+    // range-based for as we need to skip head
+
+    for (auto it = std::next(snake_.begin()); it != snake_.end(); it++) {
+        if (it->getX() == head.getX() && it->getY() == head.getY()) {
             return true;
         }
     }
@@ -109,27 +110,31 @@ void Snake::printSnake() const {
     Graphics::get().refreshScreen();
 }
 
-void Snake::move(){
-    // updates the tail by clearing it since
-    // the snake moved forward (overwrites with ' ')
+void Snake::move() {
+    auto head = snake_.begin();
+    auto second = std::next(snake_.begin());
+
+    // clear the tail - overwrites with ' '
     snake_.back().clear();
 
-    // iterate through the snake step by step
-    // using iterators so that we can get prev
-    // and iterate from back to front as we want to
-    // update each element with the value of the next
-    // and would otherwise overwrite the next before
-    // and not updating first as head is handled separately
-
-    for (auto it = std::prev(snake_.end()); it != snake_.begin(); it--) {
-        const auto prev = std::prev(it);
-        it->setPoint(prev->getY(), prev->getX());
+    // update all nodes by iterating from the back
+    // and copying the previous nodes values in
+    // until the second-to-first one
+    auto iter = std::prev(snake_.end());
+    while (iter != second) {
+        auto prev = std::prev(iter);
+        *iter = *prev;
+        iter = prev;
     }
 
-    // update the head depending on movement
+    // update the previous to head node
+    // by copying from head and setting
+    // the image to be body instead of head
+    *second = *head;
+    iter->setImg(SNAKE_BODY_CHAR);
+
     updateHead();
 
-    // print the updated snake
     printSnake();
 }
 

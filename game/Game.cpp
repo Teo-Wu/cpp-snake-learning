@@ -16,7 +16,7 @@ const std::string& SnakeGame::getBestPlayer() const {
 }
 
 void SnakeGame::play(const std::string& name){
-    auto find = std::find(players_.begin(), players_.end(), [&name](const Player& p){ return p.getName() == name; });
+    auto find = std::find_if(players_.begin(), players_.end(), [&name](const Player& p){ return p.getName() == name; });
 
     if (find == players_.end()) {
         players_.emplace_back(Player(name));
