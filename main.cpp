@@ -1,11 +1,23 @@
-
-#include <ncurses.h>
 #include <iostream>
+#include <thread>
+#include <chrono>
 
-#include "game/Game.h"
+#include "components/Point.h"
+#include "input-output/Graphics.h"
+
+void mainL01() {
+    Graphics::get().init("Learners Helper");
+
+    Point p(10,10,'X');
+
+    std::this_thread::sleep_for(std::chrono::seconds(10));
+
+    Graphics::get().finalize();
+
+    std::cout << "Helper QUIT" << std::endl;
+}
 
 int main() {
-    SnakeGame game;
-    game.play();
+    mainL01();
     return 0;
 }

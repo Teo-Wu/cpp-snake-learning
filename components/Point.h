@@ -10,15 +10,11 @@ private:
 
 public:
     Point(uint32_t y, uint32_t x, int img = '*');
+    ~Point();
 
     void setPoint(uint32_t y, uint32_t x);
     uint32_t getX() const;
     uint32_t getY() const;
-
-    void moveUp();
-    void moveDown();
-    void moveLeft();
-    void moveRight();
 
     int getImg() const;
     void setImg(int image);
