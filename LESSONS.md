@@ -158,3 +158,27 @@ The snake just learned to grow by itself! How?
 Once you're ready, you can _git merge lesson08_.
 
 ---
+
+## Lesson 08
+
+#### Prequisites
+None
+
+#### Files
+- _game/Controller.cpp_
+- _game/Controller.h_
+- _main.cpp_
+
+#### Task
+
+Even though our snake and snack are ready, we a re still not at the point where we can play. This is where the game controller comes in.
+
+1) Inspect the new files in _game/Controller.*_ and try to figure out their purpose.
+2) In the main game-function called _Controller::act()_ there are still some unimplemented sections. Fix that!
+3) There is a rudimentary game loop implemented for your use in _main.cpp_ as __mainL08__ with which you can test out what you have achieved.
+
+---
+
+## Improvements
+
+If youre still hungy for more learning, check out the master branch which does things a little differently. Try to understand everything and maybe fix the weird speed difference between vertical and horizontal snake travel (Graphics has the set-vertical which you could use). You could also implement a highscore system and allow the game state to be written to a file in order to keep high scores. Good luck and thanks for working through this!

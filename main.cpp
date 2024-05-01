@@ -5,6 +5,7 @@
 #include "components/Point.h"
 #include "components/Snack.h"
 #include "components/Snake.h"
+#include "game/Controller.h"
 #include "input-output/Graphics.h"
 
 void mainL01() {
@@ -105,7 +106,22 @@ void mainL06() {
     std::cout << "Helper QUIT" << std::endl;
 }
 
+void mainL08() {
+    Graphics::get().init("Snake Game made by YOU");
+
+    Controller controller;
+
+    while(true) {
+        controller.act();
+        if (controller.wantsToQuit()) break;
+    }
+
+    Graphics::get().finalize();
+
+    std::cout << "Final Score: " << controller.getScore() << std::endl;
+}
+
 int main() {
-    mainL06();
+    mainL08();
     return 0;
 }
