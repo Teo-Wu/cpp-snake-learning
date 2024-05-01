@@ -4,6 +4,7 @@
 
 #include "components/Point.h"
 #include "components/Snack.h"
+#include "components/Snake.h"
 #include "input-output/Graphics.h"
 
 void mainL01() {
@@ -35,7 +36,7 @@ void mainL02() {
 }
 
 void mainL03() {
-    Graphics::get().init("Learners Helper 02");
+    Graphics::get().init("Learners Helper 03");
 
     Point p(10,10);
 
@@ -65,7 +66,26 @@ void mainL03() {
     std::cout << "Helper QUIT" << std::endl;
 }
 
+void mainL04() {
+    Graphics::get().init("Learners Helper 04");
+
+    Snake snake;
+
+    for (uint32_t i = 0; i < 100; i++) {
+        snake.moveDown();
+        Graphics::get().refreshScreen();
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        snake.moveRight();
+        Graphics::get().refreshScreen();
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+
+    Graphics::get().finalize();
+
+    std::cout << "Helper QUIT" << std::endl;
+}
+
 int main() {
-    mainL03();
+    mainL04();
     return 0;
 }
