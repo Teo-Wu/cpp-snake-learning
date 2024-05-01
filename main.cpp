@@ -10,6 +10,7 @@ void mainL01() {
     Graphics::get().init("Learners Helper");
 
     Point p(10,10,'X');
+    p.print();
 
     std::this_thread::sleep_for(std::chrono::seconds(10));
 
