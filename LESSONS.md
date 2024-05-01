@@ -89,3 +89,27 @@ Now things are getting serious! The snake has smelled our delicous food and is a
 4) You have already interacted with std::vector by now. Look at the documentation for it and figure out its purpose and what else you can do with it. Play around!
 
 Once you're ready, you can _git merge lesson05_.
+
+---
+
+## Lesson 05
+
+#### Prequisites
+- Iterators/Iterating over Elements of Container
+
+#### Files
+- _components/Snake.cpp_
+- _components/Snake.h_
+- _main.cpp_
+
+#### Task
+
+The snake showed up but something is wrong. Its growing constantly without even having food. Lets fix that as we want to be super biologically accurate: no growth without energy. And as our snake can't eat yet, it should not grow at all.
+
+This one is quite difficult. Don't worry if it takes a lot of time and if you're really stuck, try the master branch with its solution.
+
+1) The culprit is our snakes _Snake::move()_ function which we must fix in order for the snake to stop growing endlessly.
+2) There are some hints written as todos but these leave a lot of room for the implementation. If you need some help, search for iterators (over std::vector) or use a for-loop over all indices from the back. These are just suggestions - try to come up with your own solution!
+3) Try this out in main where you can still use the __mainL04__ from the previous task.
+
+Once you're ready, you can _git merge lesson06_.

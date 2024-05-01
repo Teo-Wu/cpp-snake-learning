@@ -42,6 +42,11 @@ void Snake::move() {
     auto head = snake_.begin();
     auto second = std::next(snake_.begin());
 
+    // TODO: the current tail of our snake shoudl be hidden
+
+    // TODO: each element, from the tail to the second-to-head
+    //       should move to the position of the element before it
+
     // update the previous to head node
     // by copying from head and setting
     // the image to be body instead of head
