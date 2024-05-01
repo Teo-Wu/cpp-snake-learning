@@ -16,6 +16,11 @@ public:
     uint32_t getX() const;
     uint32_t getY() const;
 
+    void moveUp();
+    void moveDown();
+    void moveLeft();
+    void moveRight();
+
     int getImg() const;
     void setImg(int image);
 

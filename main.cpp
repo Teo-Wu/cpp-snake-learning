@@ -32,7 +32,36 @@ void mainL02() {
     std::cout << "Helper QUIT" << std::endl;
 }
 
+void mainL03() {
+    Graphics::get().init("Learners Helper 02");
+
+    Point p(10,10);
+
+    for (uint32_t i = 0; i < 100; i++) {
+        p.moveDown();
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        p.moveRight();
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+
+    /*
+    while(...) {
+        // TODO: play with this
+    }
+    */
+
+    /*
+    do {
+        // TODO: play with this
+    } while (...)
+    */
+
+    Graphics::get().finalize();
+
+    std::cout << "Helper QUIT" << std::endl;
+}
+
 int main() {
-    mainL02();
+    mainL03();
     return 0;
 }

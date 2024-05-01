@@ -45,3 +45,25 @@ Every little snake needs to eat. And no snake will appear without food, which is
 Once you're ready, you can _git merge lesson03_.
 
 ---
+
+## Lesson 03
+
+#### Prequisites
+- Loops
+
+#### Files
+- _components/Point.cpp_
+- _components/Point.h_
+- _main.cpp_
+
+#### Task
+
+This Task will be a little on the short side. We plan to implement our Snake as a collection of points on the screen and for that, each point should be able to move by itself. This is the objective of this lesson.
+
+1) Some new functions have appeared in _components/Point.*_ which you should inspect and try to implement.
+2) Go to _main.cpp_ and see the new __mainL03__ which will use the movement functions now implemented to make one point move across the screen diagonally. Try it out!
+3) As you can see, we use a for-loop for this but C++ has some other types of loop which you should familiarize yourself with. Try and play around with the commented-out loops and get the same result by using while and do-while loops.
+
+Once you're ready, you can _git merge lesson04_.
+
+---
