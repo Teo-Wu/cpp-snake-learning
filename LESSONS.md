@@ -41,3 +41,7 @@ Every little snake needs to eat. And no snake will appear without food, which is
 3) A Snack must also look enticing, so set its image to the one defined as SNACK_CHAR and then display the delicious snack.
 4) Experiment and use __mainL02__ to test if your code works.
 5) Notice anything interesting with how we pass the Point to the generateSnack-function? The function requests a pointer which is the address of an object instance. To get the address of an existing object, we use operator&. Read up on pointers and references.
+
+Once you're ready, you can _git merge lesson03_.
+
+---
