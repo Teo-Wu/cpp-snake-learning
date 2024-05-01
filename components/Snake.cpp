@@ -93,7 +93,7 @@ bool Snake::isBitten() const {
 
 bool Snake::hasBitSnack(uint32_t snackY, uint32_t snackX) const {
     const Point& head = snake_.front();
-    
+
     // TODO: return true if the heads position is on the same coordinates as snack
     //       and return false otherwise
 }
@@ -105,4 +105,46 @@ bool Snake::hasCrashedWall() const {
            (head.getY() > GAME_BOTTOM_WALL_Y) ||
            (head.getX() < GAME_LEFT_WALL_X)   ||
            (head.getX() > GAME_RIGHT_WALL_X);
+}
+
+
+uint32_t Snake::getSize() const {
+    return snake_.size();
+}
+
+void Snake::incSize(){
+    const auto tail = std::prev(snake_.end());
+    const uint32_t tailX = tail->getX();
+    const uint32_t tailY = tail->getY();
+
+    const auto prev = std::prev(tail);
+    const uint32_t prevX = prev->getX();
+    const uint32_t prevY = prev->getY();
+
+    if (prevY == tailY){ 
+        // if the two last parts are on the same 'height' (horizontal tail direction)
+        if (prevX < tailX) {
+            // if the tail continues to the left:
+            // add one part to the right of the tail
+            snake_.push_back(Point{tailY, tailX + 1, SNAKE_BODY_CHAR}); 
+        }
+        else {
+            // if the tail continues to the right:
+            // add one part to the left of the tail
+            snake_.push_back(Point{tailY, tailX - 1, SNAKE_BODY_CHAR});
+        }
+    }
+    else {
+        // if the two last parts are on the same 'width' (vertical tail direction)
+        if (prevY < tailY) {
+            // if the tail continues to the upper side:
+            // add one part facing down
+            snake_.push_back(Point{tailY + 1, tailX, SNAKE_BODY_CHAR});
+        }
+        else {
+            // if the tail continues to the lower side:
+            // add one part facing up
+            snake_.push_back(Point{tailY - 1, tailX, SNAKE_BODY_CHAR});
+        }
+    }
 }

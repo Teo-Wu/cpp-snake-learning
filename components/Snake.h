@@ -28,4 +28,7 @@ public:
     bool isBitten() const;
     bool hasBitSnack(uint32_t snackY, uint32_t snackX) const;
     bool hasCrashedWall() const;
+
+    uint32_t getSize() const;
+    void incSize();
 };

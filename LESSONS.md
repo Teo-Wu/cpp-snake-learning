@@ -137,3 +137,24 @@ Our snake seems invincible for now and can't eat. Run into a wall - nothing will
 Once you're ready, you can _git merge lesson07_.
 
 ---
+
+## Lesson 07
+
+#### Prequisites
+None
+
+#### Files
+- _components/Snake.cpp_
+- _components/Snake.h_
+- _main.cpp_
+
+#### Task
+
+The snake just learned to grow by itself! How?
+
+1) See the changes to _components/Snake.*_ and try to understand the new code which allows the snake to grow.
+2) Play around with this in _main.cpp_.
+
+Once you're ready, you can _git merge lesson08_.
+
+---
