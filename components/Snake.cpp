@@ -81,3 +81,28 @@ void Snake::moveRight(){
     direction_ = RIGHT;
     move();
 }
+
+bool Snake::isBitten() const {
+    const Point& head = snake_.front();
+
+    // TODO: return true if any point of the snake has the same position as the head
+    //       remember to skip the head as the snake is not flexible enough to bite off its own head
+
+    return false;
+}
+
+bool Snake::hasBitSnack(uint32_t snackY, uint32_t snackX) const {
+    const Point& head = snake_.front();
+    
+    // TODO: return true if the heads position is on the same coordinates as snack
+    //       and return false otherwise
+}
+
+bool Snake::hasCrashedWall() const {
+    const Point& head = snake_.front();
+
+    return (head.getY() < GAME_TOP_WALL_Y)    ||
+           (head.getY() > GAME_BOTTOM_WALL_Y) ||
+           (head.getX() < GAME_LEFT_WALL_X)   ||
+           (head.getX() > GAME_RIGHT_WALL_X);
+}

@@ -113,3 +113,27 @@ This one is quite difficult. Don't worry if it takes a lot of time and if you're
 3) Try this out in main where you can still use the __mainL04__ from the previous task.
 
 Once you're ready, you can _git merge lesson06_.
+
+---
+
+## Lesson 06
+
+#### Prequisites
+None
+
+#### Files
+- _components/Snake.cpp_
+- _components/Snake.h_
+- _main.cpp_
+
+#### Task
+
+Our snake seems invincible for now and can't eat. Run into a wall - nothing will happen. Bite yourself - no injury. Try to eat the snack - you will just slither over it. Sad Snake :(
+
+1) See the changes to _components/Snake.*_ and try to implement the test functions which we will use later on.
+2) After implementing them, move to _main.cpp_ where __mainL06__ will allow you to test the newly written functions.
+3) Figure out how you can test the bit-itself and bit-snack by yourself.
+
+Once you're ready, you can _git merge lesson07_.
+
+---

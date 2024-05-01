@@ -85,7 +85,27 @@ void mainL04() {
     std::cout << "Helper QUIT" << std::endl;
 }
 
+void mainL06() {
+    Graphics::get().init("Learners Helper 06");
+
+    Snake snake;
+
+    // TODO: Now the snake will eventually crash into the lower wall which we detect and then abort
+    // TODO: Figure out how to test the bit-itself and bit-snack functions yourself
+
+    while(true) {
+        snake.moveDown();
+        Graphics::get().refreshScreen();
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        if (snake.hasCrashedWall()) break;
+    }
+
+    Graphics::get().finalize();
+
+    std::cout << "Helper QUIT" << std::endl;
+}
+
 int main() {
-    mainL04();
+    mainL06();
     return 0;
 }

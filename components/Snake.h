@@ -24,4 +24,8 @@ public:
     void moveLeft();
     void moveRight();
     void move();
+
+    bool isBitten() const;
+    bool hasBitSnack(uint32_t snackY, uint32_t snackX) const;
+    bool hasCrashedWall() const;
 };
