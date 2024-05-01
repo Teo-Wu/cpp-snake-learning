@@ -12,6 +12,7 @@ void mainL01() {
     Point p(10,10,'X');
     p.print();
 
+    Graphics::get().refreshScreen();
     std::this_thread::sleep_for(std::chrono::seconds(10));
 
     Graphics::get().finalize();
@@ -25,6 +26,7 @@ void mainL02() {
     Point p(10,10);
     generateSnack(&p);
 
+    Graphics::get().refreshScreen();
     std::this_thread::sleep_for(std::chrono::seconds(10));
 
     Graphics::get().finalize();
