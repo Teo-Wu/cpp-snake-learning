@@ -41,8 +41,10 @@ void mainL03() {
 
     for (uint32_t i = 0; i < 100; i++) {
         p.moveDown();
+        Graphics::get().refreshScreen();
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         p.moveRight();
+        Graphics::get().refreshScreen();
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
