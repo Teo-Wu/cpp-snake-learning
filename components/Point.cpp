@@ -1,25 +1,28 @@
 #include "Point.h"
-
+#include <iostream>
+using namespace std;
 Point::Point(uint32_t y, uint32_t x, int img) {
-    // TODO: implement constructor
-    // should copy x,y and image
+    x_=x;
+    y_=y;
+    img_=img;
 }
 
 Point::~Point() {
-    // TODO: implement destructor
-    // should hide the point (hint: function for this already exists)
+    clear();
+    cout<< "destructed"<<endl;
 }
 
 void Point::setPoint(uint32_t y, uint32_t x) {
-    // TODO: implement this setter
+    y_=y;
+    x_=x;
 }
 
 uint32_t Point::getX() const {
-    // TODO: implement this getter
+    return x_;
 }
 
 uint32_t Point::getY() const {
-    // TODO: implement this getter
+    return y_;
 }
 
 int Point::getImg() const {

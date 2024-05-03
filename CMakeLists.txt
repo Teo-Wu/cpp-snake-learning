@@ -8,12 +8,7 @@ set(CMAKE_BUILD_TYPE Debug)
 
 set(SOURCES
     components/Point.cpp
-    components/Snack.cpp
-    components/Snake.cpp
-    game/Controller.cpp
-    game/Game.cpp
     input-output/Graphics.cpp
-    input-output/Player.cpp
     main.cpp
 )
 
