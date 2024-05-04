@@ -67,3 +67,25 @@ This Task will be a little on the short side. We plan to implement our Snake as 
 Once you're ready, you can _git merge lesson04_.
 
 ---
+
+## Lesson 04
+
+#### Prequisites
+- Arrays
+- Switch-Statement
+
+#### Files
+- _components/Snake.cpp_
+- _components/Snake.h_
+- _main.cpp_
+
+#### Task
+
+Now things are getting serious! The snake has smelled our delicous food and is appearing - beware its poisonous fangs.
+
+1) You will notice the new component _components/Snake.*_ which you should inspect closely.
+2) C++ has whats called a switch-statement which acts like many if-else-if-else chained. Look at _Snake::updateHead_ and play around with it to figure out how a switch works.
+3) Even though our snake is far from complete, we want to see it! As we decided the snake to be made up of a list of points, use a modern for-each loop to call _print()_ on all points of the snakes body.
+4) You have already interacted with std::vector by now. Look at the documentation for it and figure out its purpose and what else you can do with it. Play around!
+
+Once you're ready, you can _git merge lesson05_.
