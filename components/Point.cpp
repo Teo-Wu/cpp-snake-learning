@@ -26,19 +26,19 @@ uint32_t Point::getY() const {
 }
 
 void Point::moveUp() {
-    // TODO: implement me
+    y_-=1;
 }
 
 void Point::moveDown() {
-    // TODO: implement me
+    y_+=1;
 }
 
 void Point::moveLeft() {
-    // TODO: implement me
+    x_-=1;
 }
 
 void Point::moveRight() {
-    // TODO: implement me
+    x_+=1;
 }
 
 int Point::getImg() const {
