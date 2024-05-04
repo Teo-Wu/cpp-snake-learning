@@ -8,7 +8,9 @@ set(CMAKE_BUILD_TYPE Debug)
 
 set(SOURCES
     components/Point.cpp
+    components/Snack.cpp
     input-output/Graphics.cpp
+    
     main.cpp
 )
 
