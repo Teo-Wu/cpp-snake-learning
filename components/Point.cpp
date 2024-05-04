@@ -25,6 +25,22 @@ uint32_t Point::getY() const {
     return y_;
 }
 
+void Point::moveUp() {
+    // TODO: implement me
+}
+
+void Point::moveDown() {
+    // TODO: implement me
+}
+
+void Point::moveLeft() {
+    // TODO: implement me
+}
+
+void Point::moveRight() {
+    // TODO: implement me
+}
+
 int Point::getImg() const {
     return img_;
 }
