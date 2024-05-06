@@ -52,42 +52,50 @@ void mainL03() {
     Graphics::get().init("Learners Helper 03");
 
     Point p(10,10);
-    // for (uint32_t i = 0; i < std::min(GAME_BOTTOM_WALL_Y,GAME_RIGHT_WALL_X); i++) {
-    //     p.print();
-    //     p.moveDown();
-    //     Graphics::get().refreshScreen();
-    //     std::this_thread::sleep_for(std::chrono::milliseconds(10));
-    //     p.moveRight();
-    //     Graphics::get().refreshScreen();
-    //     std::this_thread::sleep_for(std::chrono::milliseconds(10));
-    // }
+    Point h=p;
+    for (uint32_t i = 0; i < i<std::min(GAME_BOTTOM_WALL_Y,GAME_RIGHT_WALL_X)-std::min(p.getX(),p.getY()); i++) {
+        h=p;
+        p.print();
+        Graphics::get().refreshScreen();
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        p.moveDown();
+        p.moveRight();
+        h.setImg(' ');
+        h.print();
+        Graphics::get().refreshScreen();
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        i++;
+    }
 
     // int i=0;
-    // while(i<std::min(GAME_BOTTOM_WALL_Y,GAME_RIGHT_WALL_X)) {
+    // while(i<std::min(GAME_BOTTOM_WALL_Y,GAME_RIGHT_WALL_X)-std::min(p.getX(),p.getY())) {
+    //     h=p;
     //     p.print();
-    //     p.moveDown();
     //     Graphics::get().refreshScreen();
     //     std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    //     p.moveDown();
     //     p.moveRight();
+    //     h.setImg(' ');
+    //     h.print();
     //     Graphics::get().refreshScreen();
     //     std::this_thread::sleep_for(std::chrono::milliseconds(10));
     //     i++;
     // }
    
-    int i=0;
-    do {
-        p.print();
-        p.moveDown();
-        Graphics::get().refreshScreen();
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
-        p.moveRight();
-        Graphics::get().refreshScreen();
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
-        i++;
-    } while (i<std::min(GAME_BOTTOM_WALL_Y,GAME_RIGHT_WALL_X));
-
-
-    Graphics::get().finalize();
+    // int i=0;
+    // do {
+    //     h=p;
+    //     p.print();
+    //     Graphics::get().refreshScreen();
+    //     std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    //     p.moveDown();
+    //     p.moveRight();
+    //     h.setImg(' ');
+    //     h.print();
+    //     Graphics::get().refreshScreen();
+    //     std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    //     i++;
+    // } while (i<std::min(GAME_BOTTOM_WALL_Y,GAME_RIGHT_WALL_X)-std::min(p.getX(),p.getY()));
 
     std::cout << "Helper QUIT" << std::endl;
 }
@@ -112,6 +120,6 @@ void mainL04() {
 }
 
 int main() {
-    mainL04();
+    mainL03();
     return 0;
 }
